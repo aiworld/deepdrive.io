@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DeepDrive</title>
+
+    <!-- Bootstrap -->
+    <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
+    <style>body{background: #eee;}</style>
+    <link href="vendor/css/docs.css" rel="stylesheet">
+    <link href="assets/css/deepdrive.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<!-- Docs page layout -->
+<div class="bs-docs-header" id="content">
+    <div class="container home">
+        <h1>DeepDrive</h1>
+        <p>open platform for self-driving car AI</p>
+        <div class="motivation">
+            <h3 class="motivation-title">Motivation</h3>
+            <div>
+                Self-driving cars are poised to become the most impactful technology of the 21st century.
+                Yet, to work on them, you must be in one of the few companies who have taken on the task.
+                Even then, you would be working in relative isolation from
+                other groups doing exactly the same thing.
+                This does not have to be the case.
+                <a href="http://www.linuxfoundation.org/about/members">Linux</a>,
+                <a href="https://www.postgresql.org/about/sponsors/">PostGres</a>,
+                and
+                <a href="http://www.osrfoundation.org/about/sponsors/">ROS</a>
+                are just a few examples of a different approach --
+                where companies, researchers, and individuals work together on foundational technology
+                to create a common platform for bringing better products to market.
+                DeepDrive aims to be that platform for self-driving cars powered by deep learning.
+                By combining highly realistic simulations with hooks for deep learning,
+                DeepDrive gives anyone with a computer the opportunity to build better self-driving cars.
+            </div>
+            <br>
+            <div>The current generation of self-driving cars struggle in an urban setting at speeds above 25mph,
+                requiring people to be ever-ready at the wheel.
+                This problem is aggravated by the high cost of driving,
+                high risk of accidents, and the
+                resultant limitation on the ability to test new
+                approaches.
+                Modern video-games like GTAV, however, present a world
+                where you can test self-driving car AI’s in large complex urban areas with
+                realistic roads, weather, pedestrians, cyclists, and vehicles
+                with zero cost or risk. Additionally using
+                deep learning in this environment offers the opportunity to learn
+                the nuanced driving behaviors that we expect self-driving cars will have.</div>
+            <br>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/dI4r1ZJupKc" frameborder="0" allowfullscreen></iframe>
+            <br><br>
+            <div>The incredibly high fidelity and vast open world provided by
+                GTAV also presents the most complex virtual RL environment for
+                testing interactive AI to date. This allows a new level of
+                testing for safety in AI as existing environments don’t offer
+                the same opportunities for
+                <a href="https://arxiv.org/abs/1606.06565v1">reward hacking, distributional shift,
+                and negative side effects.</a>
+                Finally, developing self-driving cars
+                out in the open provides a level of transparency not usually
+                seen in AI applications and in an area where it is crucial to
+                have visibility into both the safety and correctness of the
+                system.</div>
+        </div>
+
+        <div class="initial-release">
+            <br>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/5hFvoXV9gII?start=107" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="row home-btns">
+            <!--<div class="col-xs-6 col-md-6">-->
+                <!--<a href="https://github.com/crizcraig/brain" class="thumbnail brain">-->
+                    <!--Brain-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-md-6">-->
+                <!--<a href="https://github.com/aiworld/aiworld" class="thumbnail angrybots">-->
+                    <!--AngryBots-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-md-6">-->
+                <!--<a href="https://github.com/aiworld/dqn" class="thumbnail">-->
+                    <!--Crowd DQN-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-md-6">-->
+                <!--<a href="deepdrive" class="thumbnail">-->
+                    <!--DeepDrive-->
+                <!--</a>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<div class="container bs-docs-container blurred-body">
+    Made with <span class="heart">♡</span> in <a class="aiworld" href="http://aiworld.io/">aiworld</a>.
+</div>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="vendor/js/bootstrap.min.js"></script>
+<script src="vendor/js/docs.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="vendor/js/ie10-viewport-bug-workaround.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-3213633-17', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

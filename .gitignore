@@ -1,0 +1,5 @@
+.idea/*
+_drafts/
+_site/
+.DS_Store
+*.swp
