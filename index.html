@@ -26,86 +26,284 @@
 <div class="bs-docs-header" id="content">
     <div class="container home">
         <h1>DeepDrive</h1>
-        <p>open platform for self-driving car AI</p>
-        <div class="motivation">
-            <h3 class="motivation-title">Motivation</h3>
+        <p>self-driving car AI</p>
+        <div class="section">
+            <h3>Motivation</h3>
             <div>
-                Self-driving cars are poised to become the most impactful technology of the 21st century.
-                Yet, to work on them, you must be in one of the few companies who have taken on the task.
-                Even then, you would be working in relative isolation from
-                other groups doing exactly the same thing.
+                Self-driving cars are poised to become the most impactful
+                technology of the 21st century.
+                Yet, to work on them, you must be in one of the few companies
+                who have taken on the task.
+                Even then, you would be working in isolation from
+                other groups doing the same thing.
                 This does not have to be the case.
                 <a href="http://www.linuxfoundation.org/about/members">Linux</a>,
                 <a href="https://www.postgresql.org/about/sponsors/">PostGres</a>,
                 and
                 <a href="http://www.osrfoundation.org/about/sponsors/">ROS</a>
                 are just a few examples of a different approach --
-                where companies, researchers, and individuals work together on foundational technology
-                to create a common platform for bringing better products to market.
-                DeepDrive aims to be that platform for self-driving cars powered by deep learning.
-                By combining highly realistic simulations with hooks for deep learning,
-                DeepDrive gives anyone with a computer the opportunity to build better self-driving cars.
+                where companies, researchers, and individuals work together on
+                foundational technology
+                to provide a common platform for bringing better products to
+                market.
+                DeepDrive aims to be such a platform for self-driving cars
+                powered by deep learning.
+                By combining a highly realistic driving simulation
+                with hooks for perception and control,
+                DeepDrive gives anyone with a computer the opportunity to build
+                better self-driving cars.
             </div>
             <br>
-            <div>The current generation of self-driving cars struggle in an urban setting at speeds above 25mph,
+            <div>The current generation of self-driving cars struggles in an
+                urban setting at speeds above 25mph,
                 requiring people to be ever-ready at the wheel.
-                This problem is aggravated by the high cost of driving,
-                high risk of accidents, and the
-                resultant limitation on the ability to test new
-                approaches.
+                This problem is aggravated by the high risk of getting into an
+                accident
+                and the resultant limitation of testing new approaches on real
+                roads.
                 Modern video-games like GTAV, however, present a world
-                where you can test self-driving car AI’s in large complex urban areas with
+                where you can test self-driving car AI’s in large complex urban
+                areas replete with
                 realistic roads, weather, pedestrians, cyclists, and vehicles
-                with zero cost or risk. Additionally using
-                deep learning in this environment offers the opportunity to learn
-                the nuanced driving behaviors that we expect self-driving cars will have.</div>
+                with zero risk or cost.
+                Another important advantage of this type of simulation
+                is that you can quickly run the car through a barrage of
+                safety critical situations,
+                some of which may only occur every several million
+                miles in reality. This dramatically decreases the time involved
+                in properly vetting cars while giving transparency to the
+                decisions different types of AI's will make.
+            </div>
             <br>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/dI4r1ZJupKc" frameborder="0" allowfullscreen></iframe>
-            <br><br>
-            <div>The incredibly high fidelity and vast open world provided by
-                GTAV also presents the most complex virtual RL environment for
-                testing interactive AI to date. This allows a new level of
+            <div>The high fidelity and vast open world provided by
+                GTAV also presents the most complex virtual
+                <a href="https://en.wikipedia.org/wiki/Reinforcement_learning">
+                    RL</a> environment to date for testing sensorimotor AI.
+                This allows a new level of
                 testing for safety in AI as existing environments don’t offer
                 the same opportunities for
-                <a href="https://arxiv.org/abs/1606.06565v1">reward hacking, distributional shift,
-                and negative side effects.</a>
+                <a href="https://arxiv.org/abs/1606.06565v1">reward hacking,
+                    distributional shift,
+                    and negative side effects.</a>
                 Finally, developing self-driving cars
                 out in the open provides a level of transparency not usually
                 seen in AI applications and in an area where it is crucial to
                 have visibility into both the safety and correctness of the
-                system.</div>
+                system.
+            </div>
         </div>
 
-        <div class="initial-release">
+        <div class="section">
+            <h3>Baseline model</h3>
+            <div>
+                An initial 8-layer neural net with the AlexNet architecture
+                is being made available as well as the dataset it was trained
+                on.
+                Training was done on raw image input from a
+                forward mounted camera regressed
+                against steering, throttle, yaw, and forward-speed control
+                values produced by an in-game AI.
+                This model is able to steer the car to stay in the lane,
+                stop for other cars, and works well in a variety of weather
+                and lighting conditions as shown below:
+            </div>
+            <h4>Demo</h4>
+            <div>
+                <div class="video col-xs-12 col-md-6">
+                    <iframe src="https://www.youtube.com/embed/1uURlRKfLqY"
+                            frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div style="clear: left;">&nbsp;</div>
+            <h4>Download</h4>
+            <div>
+                <ul>
+                    <li>
+                        <a href="https://gist.github.com/aiworld/66e69c10c9ec82b299279bc7609544d2">Caffe
+                            Model</a>
+                    </li>
+                    <li>
+                        <a href="https://drive.google.com/folderview?id=0B2UgaM91sqeAWGZVaDdmaGs2cmM">
+                            Dataset (600k images, 80GB, 42 hours of driving
+                            time)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                Work is in progress on an amazon machine image as well as
+                integration with <a href="https://gym.openai.com/">
+                OpenAI Gym</a> to facilitate easy experimentation in
+                the simulator.
+            </div>
             <br>
-            <iframe width="560" height="315" src="//www.youtube.com/embed/5hFvoXV9gII?start=107" frameborder="0" allowfullscreen></iframe>
+            <div>
+                Please let me know what other types of setups and environments
+                you'd like support for at craig<script>document.write('@');</script>deepdrive.io.
+            </div>
         </div>
-        <div class="row home-btns">
-            <!--<div class="col-xs-6 col-md-6">-->
-                <!--<a href="https://github.com/crizcraig/brain" class="thumbnail brain">-->
-                    <!--Brain-->
-                <!--</a>-->
-            <!--</div>-->
-            <!--<div class="col-xs-6 col-md-6">-->
-                <!--<a href="https://github.com/aiworld/aiworld" class="thumbnail angrybots">-->
-                    <!--AngryBots-->
-                <!--</a>-->
-            <!--</div>-->
-            <!--<div class="col-xs-6 col-md-6">-->
-                <!--<a href="https://github.com/aiworld/dqn" class="thumbnail">-->
-                    <!--Crowd DQN-->
-                <!--</a>-->
-            <!--</div>-->
-            <!--<div class="col-xs-6 col-md-6">-->
-                <!--<a href="deepdrive" class="thumbnail">-->
-                    <!--DeepDrive-->
-                <!--</a>-->
-            <!--</div>-->
+        <div class="section">
+            <h3>Tips and Tricks</h3>
+            <ul>
+                <li>
+                    Adding examples of course correction to the training data is
+                    crucial. <a
+                    href="http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf">NVIDIA</a>
+                    does this by simulating rotation of
+                    real-world images, and
+                    <a href="http://repository.cmu.edu/cgi/viewcontent.cgi?article=2874&context=compsci">ALVINN</a>
+                    created its own
+                    simulation for adding variety to its training.
+                    Since we are already in
+                    simulation, course correction can be added by stopping
+                    recording, steering the car off course, and recording
+                    actions and images taken during course correction.
+                    This was done at three levels of severity.
+                    Levels one and two consisted of
+                    driving the car with a previous model for one and two
+                    seconds
+                    respectively, then recording corrective actions taken
+                    by the in-game AI. The most severe level consisted of
+                    performing a random action (hard right, hard left, brake,
+                    or strong accelerate) and relinquishing control to the
+                    in-game AI after 230ms.
+                </li>
+                <li>
+                    Training takes less than one day on a GeForce 980 starting
+                    from <a
+                    href="https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet">pretrained
+                    imagenet</a>
+                    weights using 0.002 as the base
+                    learning rate and decaying by 10x when performance plateaus.
+                    See the <a href="https://gist.github.com/aiworld/66e69c10c9ec82b299279bc7609544d2">model</a>
+                    for all hyperparameters used.
+                </li>
+                <li>Don’t mirror images without mirroring targets.
+                    Horizontally asymmetric targets like steering,
+                    rotational velocity, and direction need to be
+                    negated in order to correlate with mirrored images.
+                    Mirroring was not
+                    done in the initial release, but is likely a good direction for
+                    improved generalization.
+                </li>
+                <li>
+                    Predicting steering, speed, etc.. ahead-of-time works by
+                    adding future targets to the last fully connected layer,
+                    but causes more
+                    overfitting (e.g. 2x worst test performance with 3 frames,
+                    or 775ms, of advance data). So if you predict the future,
+                    it's probably a good idea to add more regularization.
+                    Only the current desired state of the vehicle is output by
+                    the intial model, however support for arbitrary
+                    prediction duration is provided.
+                </li>
+                <li>
+                    Feeding the current steering, speed, etc… as input to the
+                    net causes overreliance on these inputs vs. the images,
+                    so follow advice from
+                    <a href="http://repository.cmu.edu/cgi/viewcontent.cgi?article=2874&context=compsci">ALVINN</a>
+                    and feed random values
+                    to these units during early stages of training so that
+                    the image garners more influence over the output.
+                    This was also not done in the initial release, however
+                    examples are provided on how to do so.
+                </li>
+                <li>
+                    <a href="http://deepdriving.cs.princeton.edu/">DeepDriving</a>
+                    at Princeton suggests that detecting lane
+                    markers and other cars for determining the desired
+                    steering and throttle is a more tractable strategy
+                    than directly inferring steering and throttle from the
+                    image. It’s possible to get lane and nearby car location
+                    from GTAV for this approach although it is not yet implemented.
+                </li>
+                <li>
+                    The car currently has no preference for turning left or
+                    right and will wobble until a certain direction is
+                    obvious. To combat this,
+                    <a href="http://arxiv.org/pdf/1412.6572.pdf">adversarial</a>
+                    manipulation of input pixels could be used to perturbate activations
+                    towards a desired duration.
+                </li>
+                <li>
+                    Reinforcement learning is a very promising direction for
+                    future improvement.
+                    A
+                    <a href="https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf">DQN</a>
+                    was attempted before supervised learning, but the
+                    agent developed unsatisfactorily circuitous paths to a goal
+                    given on-road/off-road
+                    and distance based rewards. Using supervised pre-training
+                    and more precise rewards will likely improve this.
+                </li>
+            </ul>
+        </div>
+        <div class="section">
+            <h3>Seminal prior work</h3>
+            <ul>
+                <li>
+                    <a href="http://repository.cmu.edu/cgi/viewcontent.cgi?article=2874&context=compsci">1988
+                        - ALVINN</a>
+                </li>
+                <li>
+                    <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-dave-05.pdf">2005
+                        - DAVE</a>
+                </li>
+                <li>
+                    <a href="http://deepdriving.cs.princeton.edu/">2015
+                    - DeepDriving</a>
+                </li>
+                <li>
+                    <a href="http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf">2016
+                    - NVIDIA DriveNet</a>
+                </li>
+            </ul>
+        </div>
+        <div class="section">
+            <h3>Contact</h3>
+            craig<script>document.write('@');</script>deepdrive.io
         </div>
     </div>
 </div>
 <div class="container bs-docs-container blurred-body">
-    Made with <span class="heart">♡</span> in <a class="aiworld" href="http://aiworld.io/">aiworld</a>.
+
+    <!-- Begin MailChimp Signup Form -->
+    <div id="mc_embed_signup">
+        <form
+            action="//aiworld.us8.list-manage.com/subscribe/post?u=f9bbf4b0e7bc5e55647b6fb3c&amp;id=6c2b1fdb01"
+            method="post" id="mc-embedded-subscribe-form"
+            name="mc-embedded-subscribe-form" class="validate" target="_blank"
+            novalidate>
+            <div id="mc_embed_signup_scroll">
+                <h2 class="subscribe">Subscribe to our mailing list</h2>
+                <div class="mc-field-group">
+                    <input placeholder="Email Address" type="email" value="" name="EMAIL"
+                           class="required email" id="mce-EMAIL">
+                </div>
+                <div class="response" id="mce-responses" class="clear">
+                    <div class="response" id="mce-error-response"
+                         style="display:none"></div>
+                    <div class="response" id="mce-success-response"
+                         style="display:none"></div>
+                </div>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div class="marvin" style="position: absolute; left: -5000px;"
+                     aria-hidden="true"><input type="text"
+                                               name="b_f9bbf4b0e7bc5e55647b6fb3c_6c2b1fdb01"
+                                               tabindex="-1" value=""></div>
+
+                <div class="submit"><input type="submit" value="Subscribe"
+                                          name="subscribe"
+                                          id="mc-embedded-subscribe"
+                                          class="button"></div>
+            </div>
+        </form>
+    </div>
+
+    <!--End mc_embed_signup-->
+
+    Made with <span class="heart">♡</span> in <a class="aiworld" href="http://aiworld.io/">aiworld</a>
 </div>
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -117,9 +315,9 @@
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-3213633-17', 'auto');
+  ga('create', 'UA-3213633-19', 'auto');
   ga('send', 'pageview');
 
 </script>

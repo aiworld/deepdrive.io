@@ -1,6 +1,6 @@
 body {font-family: 'Open Sans', sans-serif; font-weight: 300}
 .bs-docs-header h1, .bs-docs-header p {text-align: center; margin-right: 0;}
-.bs-docs-header h1 {font-size: 4.4em;}
+.bs-docs-header h1 {font-size: 2.4em;}
 .bs-docs-header p {font-size: 1.36em;}
 .bs-docs-header h1, #content {
     background: hsl(229, 30%, 18%);
@@ -22,7 +22,7 @@ body {font-family: 'Open Sans', sans-serif; font-weight: 300}
     width: 100%;
     opacity: 1;
     text-align: center;
-    padding-top: 170px;
+    padding-top: 111px;
 }
 
 .why-body p, blockquote, .footnotes, .call-to-action {
@@ -63,7 +63,7 @@ a.back {
 .highlighted {background-color: #ff0;}
 .navbar {border-bottom: solid 1px #e7e7e7;}
 .crowd-sig {font-size: 14px; font-weight: 400;}
-.home {text-align: center;}
+.home {text-align: center;/* width: 720px; */}
 .home-btns {
     text-align: center;
     margin: 30px auto;
@@ -79,11 +79,10 @@ a.back {
     padding-top: 2.2em;
 }
 
-.bs-docs-header .motivation, .bs-docs-header .initial-release {
+.bs-docs-header .section {
     text-align: left;
     font-size: 0.7em;
     padding-top: 42px;
-    width: 50%;
     font-weight: lighter;
     margin: auto;
     color: hsl(0, 0%, 97%);
@@ -111,4 +110,41 @@ a:hover, a:active {
     color: hsl(218, 80%, 56%);
 }
 
+.video iframe {
+    width: 100%;
+    height: 19.3em;
+}
 
+.subscribe {
+    font-size: 21px;
+    display: inline;
+    padding-right: 7px;
+}
+
+div#mc_embed_signup_scroll {
+    margin-bottom: 40px;
+}
+
+.subscribe, .mc-field-group, .submit, .marvin, .response {
+    display: inline;
+    vertical-align: middle;
+    line-height: 1.8;
+}
+
+.email {
+    padding-left: 4px;
+}
+
+input#mc-embedded-subscribe {
+    -webkit-appearance: none;
+}
+
+div#mc_embed_signup {
+    font-weight: normal !important;
+}
+
+.alert {
+    margin-bottom: 0;
+    color: #aa6633;
+    font-weight: normal;
+}
