@@ -115,6 +115,11 @@ a:hover, a:active {
     height: 19.3em;
 }
 
+.video2 iframe {
+    width: 100%;
+    height: 18em;
+}
+
 .subscribe {
     font-size: 21px;
     display: inline;
