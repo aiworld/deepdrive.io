@@ -153,3 +153,24 @@ div#mc_embed_signup {
     color: #aa6633;
     font-weight: normal;
 }
+
+.logo {
+    width: 300px
+}
+
+.universe-announce {
+    background: #fd7;
+    margin: 0;
+    padding-top: 6px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    border: 0;
+    /*color: #0000aa;*/
+    font-weight: normal;
+    font-size: 1.01em;
+    text-align: center;
+}
+
+.universe-announce a {
+    color: #458;
+}

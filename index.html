@@ -22,10 +22,14 @@
 </head>
 <body>
 
+<div class="page-header universe-announce">
+    <a href="https://openai.com/blog/GTA-V-plus-Universe/">Announcing DeepDrive in Universe!</a>
+</div>
+
 <!-- Docs page layout -->
 <div class="bs-docs-header" id="content">
     <div class="container home">
-        <h1>DeepDrive</h1>
+        <h1><img class="logo" src="assets/img/logo_light.svg" alt="DeepDrive logo"></h1>
         <p>self-driving car AI</p>
         <div class="section">
             <h3>Motivation</h3>
@@ -146,7 +150,20 @@
                 </div>
             </div>
             <div style="clear: left;">&nbsp;</div>
-            <h4>Download</h4>
+
+            <h4>Running</h4>
+            Since GTAV runs in Windows and ML typically happens on Linux / Mac, DeepDrive consists of two main components:
+            <div>
+                <ul>
+                    <li>
+                        <a href="https://github.com/openai/universe-windows-envs/blob/master/vnc-gtav/README.md">Universe environment on Windows (AMI available)</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/deepdrive/deepdrive-universe">Pretrained agents running in Linux or Mac</a>
+                    </li>
+                </ul>
+            </div>
+            <a name="download"><h4>Download</h4></a>
             <div>
                 <ul>
                     <li>
@@ -177,13 +194,6 @@
                         <a href="https://docs.google.com/document/d/1c3upen7NsvkAwgxTC9rhAZJr75Zkn3EP2FVf1Ailqww">Dataset README</a>
                     </li>
                 </ul>
-            </div>
-
-            <div>
-                Work is in progress on an amazon machine image as well as
-                integration with <a href="https://gym.openai.com/">
-                OpenAI Gym</a> to facilitate easy experimentation in
-                the simulator.
             </div>
             <br>
             <div>
