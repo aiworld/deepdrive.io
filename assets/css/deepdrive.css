@@ -2,17 +2,16 @@ body {font-family: 'Open Sans', sans-serif; font-weight: 300}
 .bs-docs-header h1, .bs-docs-header p {text-align: center; margin-right: 0;}
 .bs-docs-header h1 {font-size: 2.4em;}
 .bs-docs-header p {font-size: 1.36em;}
-.bs-docs-header h1, #content {
-    background: hsl(229, 30%, 18%);
+.bs-docs-header h1, #content, .globalContent {
+    background: hsl(229, 43%, 18%);
     color: hsl(240, 11%, 100%);
     text-shadow: 0;
     font-weight: 400;
 }
 .bs-docs-header {
-    padding-top: 100px;
     border-bottom: solid 1px #bbb;
-    padding-bottom: 55px;
     margin-bottom: 0;
+    padding: 0;
 }
 .blurred-body {
     /* background: url('../images/background-blurred.jpg'); */
@@ -81,11 +80,12 @@ a.back {
 
 .bs-docs-header .section {
     text-align: left;
-    font-size: 0.7em;
+    font-size: 20px;
     padding-top: 42px;
     font-weight: lighter;
     margin: auto;
     color: hsl(0, 0%, 97%);
+    max-width: 1000px;
 }
 
 .heart {
@@ -94,7 +94,7 @@ a.back {
 
 a {
     color: hsl(218, 100%, 92%);
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:hover, a:active {
@@ -155,7 +155,8 @@ div#mc_embed_signup {
 }
 
 .logo {
-    width: 300px
+    width: 300px;
+    margin-top: 200px;
 }
 
 .universe-announce {
@@ -175,28 +176,126 @@ div#mc_embed_signup {
     color: #458;
 }
 
-.down-notice {
-    background: #fff;
+.video {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.robot-love {
+    width: 18px;
+}
+
+.announce-2 {
+    background-color:rgba(200, 200, 200, 0.5);
     border-radius: 10px;
-    padding: 55px;
-    color: #000;
+    padding: 30px;
+    margin: 30px !important;
 }
 
-.down-title {
+.bg {
+    background: hsl(229, 43%, 18%);
+    width: 100%;
+    height: 500px;
+    background-image: url("../img/deepdrive2bg.jpg");
+    /*background-position: -140px, -350px;*/
+    /*background-size:100% auto;*/
+    background-size: cover;
+    background-position: 45%, 50%;
+    margin: 0;
+    padding: 0;
+    border: 0;
     text-align: center;
-    font-size: 2.3em;
-    padding-bottom: 20px;
+
 }
 
-.down-body p {
-    text-align: left;
-    padding-bottom: 15px;
+.bg-img {
+    width: 100%;
+    border: 0;
 }
 
-.down-notice a {
-    color: #00f;
+h1 {
+    margin: 0;
 }
 
-.down-notice a:hover {
-    color: #00f;
+h2 {
+    font-size: 35px;
 }
+
+h3 {
+    font-size: 27px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+.tagline {
+    color: #aaa;
+    font-size: 2em;
+}
+
+.bg-small {
+    background-color: #e0e0e0;
+}
+
+.bg-small-img {
+    height: 57px;
+}
+
+.faq {
+    margin-top: 50px !important;
+}
+
+pre {
+    border: none;
+}
+
+.code-example {
+    margin-top: 16px;
+}
+
+.description {
+    text-align: left !important;
+    font-size: 23px !important;
+    font-style: italic;
+}
+
+.d2tagline {
+    font-size: 16px;
+    /*font-weight: 300;*/
+    font-style: normal;
+}
+
+.container-fluid {
+  /*max-width: 600px;*/
+}
+
+.v-spacer {
+    margin-bottom: 15px;
+}
+
+.donate-section a {
+    text-decoration: none;
+}
+
+.donate {
+    font-size: 23px;
+    padding: 8px 20px;
+    width: 250px;
+    margin: auto;
+    display: block;
+}
+
+.donate-section {
+    text-align: center;
+    width: 100%;
+}
+
+.donate-header {
+    text-align: center;
+    margin: 20px auto;
+
+}
+
+pre {
+    font-size: 17px; }

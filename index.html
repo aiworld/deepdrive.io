@@ -4,14 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DeepDrive</title>
+    <title>Deepdrive</title>
 
     <!-- Bootstrap -->
     <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
-    <style>body{background: #eee;}</style>
+    <style>body {
+        background: #eee;
+    }</style>
     <link href="vendor/css/docs.css" rel="stylesheet">
     <link href="assets/css/deepdrive.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,34 +24,156 @@
 </head>
 <body>
 
+<!--<div class="page-header universe-announce">-->
+    <!--<a href="#blog-post">Deepdrive 2.0 has launched!</a>-->
+<!--</div>-->
+
+<div class="bg">
+    <h1><img class="logo" src="assets/img/logo_light.svg" alt="Deepdrive logo"></h1>
+    <p class="tagline">self-driving AI</p>
+</div>
+
 <!-- Docs page layout -->
 <div class="bs-docs-header" id="content">
     <div class="container home">
-        <h1><img class="logo" src="assets/img/logo_light.svg" alt="DeepDrive logo"></h1>
         <div class="section">
-            <div class="down-notice">
-                <div class="down-title">DeepDrive Down</div>
-                <div class="down-body">
-                    <p>DeepDrive started with a mission to allow more people to work on self-driving AI,
-                        and the interest it <a href="https://news.ycombinator.com/item?id=13375543">received</a>
-                    <a href="https://www.reddit.com/r/SelfDrivingCars/comments/4wu7bd/someone_built_selfdriving_car_ai_that_lives/">was</a>
-                        <a href="https://www.theregister.co.uk/2017/01/12/gta_v_open_ai_universe/">absolutely</a>
-                        <a href="https://www.reddit.com/r/MachineLearning/comments/5ndjf6/news_gta_v_integration_into_universe_is_now/">incredible</a>
-                        - something I am truly
-                    grateful to you all for.</p>
-                    <p>Unfortunately, however, we are restricted from providing resources using GTAV for legal reasons.</p>
-                    <p>I still believe that empowering more people to work on
-                        self-driving will have a massively beneficial impact, both for advancing self-driving state of
-                        the art and longer term for increased participation in applied AI.
-                        I will therefore look to support or discuss any such projects / ideas going forward.
-                    </p>
+            <p class="description">
+                Deepdrive is an open simulation platform built to accelerate progress and increase transparency
+                in self-driving AI.
+                We enable more people to develop AI by decoupling it from
+                self-driving hardware and facilitate research through establishing standard benchmarks and baselines.
+            </p>
+        </div>
+
+        <div class="section">
+
+            <h2>Deepdrive 2.0</h2>
+            <h4>The easiest way to experiment with self-driving AI</h4>
+            <h3>Features</h3>
+
+            <div class="v-spacer"><b>Baseline agent</b>
+                <div>Use our
+                    <a href="https://github.com/deepdrive/deepdrive/blob/master/tensorflow_agent/agent.py">pretrained example agent</a>,
+                    <a href="https://github.com/deepdrive/deepdrive/tree/master/tensorflow_agent/train">training code</a>,
+                    and
+                    <a href="https://github.com/deepdrive/deepdrive/#dataset">dataset</a>
+                    to get started building your own AI and try to beat our <a href="https://github.com/deepdrive/deepdrive#benchmark">high score!</a>
                 </div>
             </div>
+            <div class="v-spacer"><b>Dataset</b>
+                <div>
+                    Download the <a href="https://github.com/deepdrive/deepdrive#dataset">100GB, 8.2 hour, dataset</a>
+                    we used to train the baseline agent, complete with depth,
+                    <a href="https://youtu.be/C_LGsoe36I8?t=21m15s">DAgger</a> labels,
+                    and capture augmentation used to achieve scores on-par with the path-follower.
+                </div>
+            </div>
+            <div class="v-spacer"><b>Modifiable source</b>
+                <div>Our <a href="https://github.com/deepdrive/deepdrive">AI</a>,
+                    <a href="https://github.com/deepdrive/deepdrive-sim/tree/master/Plugins/DeepDrivePlugin">Unreal plugin</a>,
+                    <a
+                            href="https://github.com/deepdrive/deepdrive">simulation assets and code</a>,
+                    and <a href="https://www.unrealengine.com/ue4-on-github">Unreal Engine</a> are all on GitHub, so you can
+                    modify the agent and the environment to automate labeling and iterate on ideas in minutes
+                    instead of weeks or months.
+                </div>
+            </div>
+            <div class="v-spacer"><b>Eight cameras with depth</b>
+                <div>Enable up to eight cameras with images and depth
+                    transferred at blazing speeds via shared memory. i.e.
+                    Eight 512x512 48 bit RGB with 16 bit depth channel cameras, uncompressed on
+                    a GTX 980 over PCIe 3.0 x 16 are available at 20Hz as NumPy arrays.
+                </div>
+            </div>
+            <div class="v-spacer"><b>Linux / Windows support</b>
+                <div>First class support for Linux and Windows, one command
+                    <code>python install.py</code>, and you'll be piloting Deepdrive in minutes.
+                </div>
+            </div>
+            <div class="v-spacer"><b>Visual scripting</b>
+                <div>Quickly change anything in the simulation with
+                    <a href="https://docs.unrealengine.com/latest/INT/Videos/PLZlv_N0_O1gY35ezlSQn1sWOGfh4C7ewO/EFXMW_UEDco/">Unreal
+                        Blueprints</a>,
+                    using the full power of Unreal's C++ API.
+                </div>
+            </div>
+            <div class="v-spacer"><b>C++ extendability</b>
+                <div>Everything is C++ under the hood,
+                    so you can integrate existing systems and highly optimize anything you want.
+                </div>
+            </div>
+            <div class="v-spacer"><b>Python API</b>
+                <div>Interface through the <a href="https://github.com/openai/gym">Gym</a> API
+                    using a reward function based on speed, safety, legality, and comfort.
+                    <div style="font-size: 0.3em">&nbsp;</div>
+                    <div>Example forward agent</div>
+                </div>
+
+
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">deepdrive</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">dd</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">main</span>():
+    env <span style="color: #333333">=</span> dd<span style="color: #333333">.</span>start()
+    forward <span style="color: #333333">=</span> dd<span style="color: #333333">.</span>action(throttle<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">1</span>, steering<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span>, brake<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span>)
+    done <span style="color: #333333">=</span> <span style="color: #007020">False</span>
+    <span style="color: #008800; font-weight: bold">while</span> <span style="color: #000000; font-weight: bold">not</span> done:
+        observation, reward, done, info <span style="color: #333333">=</span> env<span style="color: #333333">.</span>step(forward)
+
+<span style="color: #008800; font-weight: bold">if</span> __name__ <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;__main__&#39;</span>:
+    main()
+</pre></div>
+
+
+
+
+
+
+
+            </div>
         </div>
+
+        <div class="section">
+            <h4>Video</h4>
+            <div class="video col-xs-12 col-md-24">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/p4DbNFkQU78" frameborder="0"
+                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>GitHub</h3>
+            <div><a href="https://github.com/deepdrive/deepdrive">Deepdrive</a> - Agents, training, and API to simulator - start here!</div>
+            <div><a href="https://github.com/deepdrive/deepdrive-sim">Deepdrive sim</a> - Unreal project, Unreal Plugin, assets, and Python extension</div>
+
+        </div>
+
+        <!--<div class="section">-->
+            <!--<h3>Data</h3>-->
+        <!--</div>-->
+
+        <!--<div class="section">-->
+            <!--<h3>Unreal Assets</h3>-->
+        <!--</div>-->
+
+        <div class="section">
+            <h3><a href="faq.html">FAQ</a></h3>
+            Answers to common questions
+        </div>
+
         <div class="section">
             <h3>Contact</h3>
-            craig<script>document.write('@');</script>deepdrive.io
+            craig
+            <script>document.write('@');</script>
+            deepdrive.io
         </div>
+
+        <div class="section donate-section">
+            <a href="donate.html"><button type="button" class="btn btn-primary donate">Donate</button></a>
+        </div>
+
+        <div class="section"></div>
+
     </div>
 </div>
 <div class="container bs-docs-container blurred-body">
@@ -57,10 +181,10 @@
     <!-- Begin MailChimp Signup Form -->
     <div id="mc_embed_signup">
         <form
-            action="//aiworld.us8.list-manage.com/subscribe/post?u=f9bbf4b0e7bc5e55647b6fb3c&amp;id=6c2b1fdb01"
-            method="post" id="mc-embedded-subscribe-form"
-            name="mc-embedded-subscribe-form" class="validate" target="_blank"
-            novalidate>
+                action="//aiworld.us8.list-manage.com/subscribe/post?u=f9bbf4b0e7bc5e55647b6fb3c&amp;id=6c2b1fdb01"
+                method="post" id="mc-embedded-subscribe-form"
+                name="mc-embedded-subscribe-form" class="validate" target="_blank"
+                novalidate>
             <div id="mc_embed_signup_scroll">
                 <h2 class="subscribe">Subscribe to our mailing list</h2>
                 <div class="mc-field-group">
@@ -80,16 +204,15 @@
                                                tabindex="-1" value=""></div>
 
                 <div class="submit"><input type="submit" value="Subscribe"
-                                          name="subscribe"
-                                          id="mc-embedded-subscribe"
-                                          class="button"></div>
+                                           name="subscribe"
+                                           id="mc-embedded-subscribe"
+                                           class="button"></div>
             </div>
         </form>
     </div>
 
     <!--End mc_embed_signup-->
-
-    Made in <a class="aiworld" href="http://aiworld.io/">aiworld</a>
+    Made with <span class="heart">♡</span> on <a class="aiworld" href="https://www.youtube.com/watch?v=wupToqz1e2g">our pale blue dot</a>
 </div>
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -98,13 +221,20 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="vendor/js/ie10-viewport-bug-workaround.js"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-3213633-19', 'auto');
-  ga('send', 'pageview');
+    ga('create', 'UA-3213633-19', 'auto');
+    ga('send', 'pageview');
 
 </script>
 </body>
