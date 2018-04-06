@@ -299,3 +299,44 @@ pre {
 
 pre {
     font-size: 17px; }
+
+.blog-section {
+    background: #fff;
+    border-radius: 10px;
+    padding: 55px;
+    margin: 55px;
+    color: #000;
+    font-size: 17px;
+}
+
+.blog-section a {
+    color: #00f;
+}
+
+.blog-section h2 {
+    text-align: left;
+    font-size: 25px;
+    font-weight: bold;
+
+}
+
+.blog-title {
+    text-align: center;
+    font-size: 2.3em;
+    padding-bottom: 20px;
+}
+
+.blog-body p {
+    text-align: left;
+    padding-bottom: 15px;
+}
+
+
+
+.blog-section a:hover {
+    color: #00f;
+}
+
+.skip-link {
+    font-size: 18px;
+}
