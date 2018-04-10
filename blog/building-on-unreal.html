@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rebuilding Deepdrive in Unreal</title>
+    <meta property="og:image" content="https://deepdrive.io/assets/img/cam-depth3.jpg" />
+    <!-- Bootstrap -->
+    <link href="../vendor/css/bootstrap.min.css" rel="stylesheet">
+    <style>body {
+        background: #eee;
+    }</style>
+    <link href="../vendor/css/docs.css" rel="stylesheet">
+    <link href="../assets/css/deepdrive.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+
+
+<div class="bg-small">
+    <a href="../index.html"><img class="bg-small-img" src="../assets/img/logo_dark.svg" alt="Deepdrive logo"></a>
+</div>
+
+<!-- Docs page layout -->
+<div class="bs-docs-header" id="content">
+    <div class="container home">
+        <div class="blog-section">
+                <div class="blog-title">Rebuilding Deepdrive on Unreal Engine</div>
+                <div class="blog-time">April 8, 2018</div>
+                <div class="blog-body">
+                    <img style="margin-bottom: 20px;" width="900" src="../assets/img/deepdrive-closeup.jpg"/>
+                    <p>TLDR; Deepdrive has been rebuilt without GTA and now includes support for multiple cameras,
+                        depth, and running natively on Linux - All open source on Unreal Engine.
+                        <a href="https://deepdrive.io">Check it out!</a>
+                    </p>
+                    <h2>Background - <a class="skip-link" href="#unreal">or skip to Unreal stuff</a></h2>
+                    <p>A little over a year ago, I worked with OpenAI to release an integration for GTAV into
+                        the Universe platform. The goal was to make one of the most complex video games available to
+                        researchers to experiment with methods like
+                        <a href="http://rll.berkeley.edu/deeprlcourse/">deep reinforcement learning</a>
+                        for self-driving.
+                    </p>
+
+                    <p>
+                        However, it turned out that TakeTwo was not as receptive to people using GTAV for this purpose
+                        <a href="https://www.forbes.com/sites/aarontilley/2017/10/04/grand-theft-auto-v-the-rise-and-fall-of-the-diy-self-driving-car-lab/">as I had hoped.</a>
+                    </p>
+
+                    <div style="float: right; margin-bottom: 75px;">
+                        <img src="../assets/img/kibosh.jpg" width="325" style="margin: 10px;"/>
+                        <br>
+                        Deepdrive was taken down early 2017 due to
+                        <br>
+                        legal issues around using GTAV.
+
+                        Image from Deepdrive <br>Universe blog post.
+                    </div>
+
+
+
+                    <p>I apologize for not having gotten TakeTwo's permission to use GTA.
+                        I know that many of you had spent time with Deepdrive 1.0 and Deepdrive Universe, and am
+                        deeply sorry for not being able to continue to support you.
+                        I hope that rebuilding the project on Unreal will be able to restore what you
+                        found valuable in the GTA version, and eventually do much more.
+                    </p>
+                    <p>Before Deepdrive Universe launched, I had started work at Uber's Advanced Technologies Group
+                        on their perception team. Deepdrive caught their eye as relevant experience applying
+                        deep learning to self-driving. It was also an opportunity to incorporate real world concerns
+                        back into Deepdrive, something I was very grateful Uber was supportive of.
+                    </p>
+                    <div style="float: left; margin-bottom: 50px; margin-top: 80px; text-align: left;">
+                        <img src="../assets/img/levine-trajectory-iid.jpg" align="left" width="400px"
+                             style="margin: 10px;"/>
+
+                        <br>
+                        Levine's Fall 2017 Deep RL course
+                        <a href="http://rll.berkeley.edu/deeprlcourse/f17docs/lecture_2_behavior_cloning.pdf"
+                            >slides</a>
+                    </div>
+                    <div style="clear: right;"></div>
+
+                    <p>
+                        One thing I noticed early on there was that I had solved the same problems in simulation
+                        as had been solved for real-world cars, but in a much different way. For example,
+                        in imitation learning, you often need to
+                        reduce sampling error when the training and test distributions
+                        <a href="https://youtu.be/C_LGsoe36I8?t=14m31s">are not IID.</a>
+                    </p>
+                    <div style="clear: left;"></div>
+                    <div style="float:left; margin-bottom: 30px; margin-top: 20px; text-align: left;">
+                        <a href="../assets/img/nvidia-dave2.jpg">
+                            <img src="../assets/img/nvidia-dave2.jpg" align="left" width="400"
+                                 style="margin: 10px;"/></a>
+
+                        <br>
+                        <a href="https://arxiv.org/abs/1604.07316">Bojarski et al. ‘16, NVIDIA</a>
+                    </div>
+                    <p style="margin-top: 100px;">
+                        In <a href="https://arxiv.org/abs/1604.07316">real cars</a>,
+                        this is dealt with by "pretending" as if the left or right camera is in the
+                        center of the car and generating a corresponding corrective steering action to get back
+                        to the center of the lane.
+                        <a href="http://www.cs.cmu.edu/~seitz/papers/thesis.pdf">Viewpoint transformation</a>
+                        then can interpolate between cameras to generate
+                        additional corrective labels under the assumption of an infinite horizon - i.e. flat roads.
+                    </p>
+                    <div style="clear: left;"></div>
+                    <p>
+                        In simulation, we can (safely!) vary the trajectory of the car and see what an oracle
+                        path-following AI does to correct its trajectory.
+                    </p>
+                    <iframe src="https://giphy.com/embed/2jMon1ulxOeNzZWk8H" width="480" height="270"
+                            frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                    <div style="clear: both;"></div>
+                    <div style="float:right; margin-bottom: 30px; margin-top: 40px;
+                        text-align: left; width: 200px; margin-left: 30px; margin-right: 50px;">
+                        <a href="../assets/img/input-remapping-trick.jpg">
+                            <img src="../assets/img/input-remapping-trick.jpg" align="left" width="200"
+                                 style="margin: 10px;"/></a>
+
+                        <br>
+                        Using motion capture sensors for training a robot to act using just a camera.
+                        <a href="https://arxiv.org/abs/1504.00702">Levine, Finn, et al. 16</a>
+                    </div>
+
+                    <p style="margin-top: 160px;">
+                        So it’d be great to use this simulated training to improve real-world performance as
+                        we can try things with zero safety risk. Not only that, but we can "cheat" and
+                        use the game's perfect 3D world model with
+                        <a href="https://arxiv.org/abs/1504.00702">techniques like this</a> and
+                        <a href="https://arxiv.org/abs/1711.03213">this</a> to adapt
+                        driving to the real-world.
+                    </p>
+                    <div style="clear: both;"></div>
+                    <p>
+                        Excitingly, we found that neural networks trained on real-world
+                        driving were able to drive in simulated environments, and therefore going the other direction
+                        was promising, although not something we pursued.
+                    </p>
+                    <p>
+                        Over the course of a year there,
+                        I was able to familiarize myself more with the problems real self-driving cars ran into by
+                        digging into the fundamental reasons for our disengagements and riding in test cars.
+                        Doing so I became increasingly excited about what an open self-driving simulator could to help solve many of
+                        these problems.
+                        <!--by-->
+                        <!--<ol style="text-align: left; font-size: 17px;">-->
+                            <!--<li >Letting more people work on the problem, and-->
+                            <!--<li>Letting them quickly and safely try things in software without the immense amount of time,-->
+                            <!--money, and risk required to do so on the road.-->
+                        <!--</ol>-->
+                    <p>
+                        So in November, I left to do just that and began work on Deepdrive 2.0.
+                    </p>
+                    <a class="skip-anchor" name="unreal"></a><h2>The move to Unreal</h2>
+
+                    <div style="margin-bottom: 20px; margin-top: 20px">
+                        <a href="../assets/img/gears4.jpg"  ><img width="300" src="../assets/img/gears4.jpg"  /></a>
+                        <a href="../assets/img/pubg2.jpg"    ><img width="300" height="168" src="../assets/img/pubg2.jpg"    /></a>
+                        <a href="../assets/img/fortnite.jpg"><img width="300" src="../assets/img/fortnite.jpg"/></a>
+                        <br>
+                        Some of the popular games made in Unreal - Gears 4, PUBG, and Fortnite from left to right.
+                        Epic, the company behind Unreal Engine, also created Gears and Fortnite.
+                        PUBG and Fortnite
+                        are currently the most popular online games with
+                        <a href="http://store.steampowered.com/stats/">
+                            2M</a>
+                        and <a href="https://www.pcgamesn.com/fortnite/fortnite-vs-pubg-map-players-graphics-gameplay-weapons-review#playercount"
+                            >3M</a>
+                        <i>concurrent</i> users
+                        respectively (that's close to the number of concurrent users on Facebook!).
+                    </div>
+
+                    <p>
+                        We evaluated many engines and Unreal not only checked the boxes, but <i>felt</i> best to us.
+                        From a feature perspective Unreal is the only free, shared source, AAA engine available.
+                        Having the source is critical as we might need to do crazy stuff like optimize eight
+                        camera rendering, swapping out the physics engine, or running faster than real-time.
+                    </p>
+
+                    <table class="engine-compare">
+                        <tbody>
+                        <tr class="engine-margin">
+                            <td style="border:none; background: white;"></td>
+                            <td>Source</td>
+                            <td>Pricing</td>
+                            <td>Linux</td>
+                            <td>AAA</td>
+                        </tr>
+                        <tr>
+                            <td class="engine-name">Unreal</td>
+                            <td class="engine-okay">Shared</td>
+                            <td class="engine-okay">Free with revenue cap, then 5%</td>
+                            <td class="engine-best">⭐⭐⭐⭐</td>
+                            <td class="engine-best">Yes</td>
+                        </tr>
+                        <tr>
+                            <td class="engine-name">Unity</td>
+                            <td class="engine-worse">Paid access only</td>
+                            <td class="engine-okay">Free with revenue cap, then fixed monthly</td>
+                            <td class="engine-best">⭐⭐⭐</td>
+                            <td class="engine-best">Yes</td>
+                        </tr>
+                        <tr>
+                            <td class="engine-name">LumberYard (CryEngine fork)</td>
+                            <td class="engine-okay">Shared</td>
+                            <td class="engine-best">Free</td>
+                            <td class="engine-worst">No</td>
+                            <td class="engine-best">Yes</td>
+                        </tr>
+                        <tr>
+                            <td class="engine-name">CryEngine</td>
+                            <td class="engine-worst">Simulation not permitted</td>
+                            <td class="engine-okay">$9.90/mo</td>
+                            <td class="engine-best">⭐⭐</td>
+                            <td class="engine-best">Yes</td>
+                        </tr>
+                        <tr>
+                            <td class="engine-name">Quake3 - ioq3</td>
+                            <td class="engine-better">GPL-2</td>
+                            <td class="engine-best">Free</td>
+                            <td class="engine-best">⭐..?</td>
+                            <td class="engine-worst">No</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="engine-compare-caption">
+                        Our comparison chart of engines circa 2017. Quake 3 thrown in for its use by <a href="https://github.com/deepmind/lab">
+                        DeepMind</a>, a major driver of increasing sophistication of environments
+                        <a href="https://scholar.google.com/scholar?cites=3142026830514187809&as_sdt=805&sciodt=0,3&hl=en"
+                        >used in</a>
+                        <a href="https://scholar.google.com/scholar?cites=10877906446132695264&as_sdt=805&sciodt=0,3&hl=en"
+                        >seminal research</a>.
+                    </div>
+
+                    <p>
+                        There are a lot of other engines out there, including some really interesting ones
+                        like <a href="https://godotengine.org/">Godot</a>, however when it comes to
+                        realism - Unity, Unreal, CryEngine and are still quite far ahead of the pack.
+                    </p>
+
+
+                    <div style="margin-bottom: 30px; ">
+                    <iframe style="width: 100%; height: 300px;" src="https://www.youtube.com/embed/ZRKHzZ6OeWE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                        <br>
+                        Demo
+                        <a href="https://venturebeat.com/2018/03/21/epic-games-shows-real-time-ray-tracing-in-unreal-engine-with-star-wars-demo/"
+                        > at GDC 18</a> of real-time raytracing in Unreal.
+                    </div>
+
+                    <p>
+                        Other open source projects like
+                        <a href="https://github.com/Microsoft/AirSim"
+                        >AirSim</a>
+                        and
+                        <a href="http://carla.org"
+                        >Carla</a>
+                        are also using Unreal. It’s my hope these sims can reuse components
+                        and cooperate. We have already worked with the Carla team on some synchronization functionality
+                        and it’s very exciting to see the growing community around open self-driving.
+                        In addition, the self-driving simulators at
+                        <a href="https://www.google.com/url?q=https://www.youtube.com/watch?v%3DbooEg6iGNyo&sa=D&ust=1523169575334000"
+                        >NVIDIA</a>,
+                        <a href="https://www.linkedin.com/jobs/view/senior-software-engineer-unreal-engine-at-cruise-automation-586806592/"
+                        >Cruise</a>, and
+                        <a href="https://www.google.com/url?q=https://www.youtube.com/watch?v%3DotmxoK4lCNw%26feature%3Dyoutu.be%26t%3D23m15s&sa=D&ust=1523169575332000"
+                        >Zoox</a> are built on Unreal.
+                    </p>
+
+                    <div style="clear: both;"></div>
+
+                    <div style="width: 425px; float: left;">
+                        <a href="../assets/img/airsim.gif">
+                            <img src="../assets/img/airsim.gif" width="425" height="257"/></a>
+
+                        <br>
+                        Microsoft AirSim
+                        <br>
+                        <br>
+                        <video controls loop autoplay width="425" height="234">
+                            <source src="../assets/video/carla-small.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <br>
+                        Carla
+                    </div>
+                    <div style="width: 425px; float: left; margin-left: 40px;">
+                        <video controls loop autoplay width="425">
+                            <source src="../assets/video/nvidia-sim-small.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        NVIDIA AutoSim
+                        <br>
+                        <br>
+                        <video controls loop autoplay width="425">
+                            <source src="../assets/video/zoox-small.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <br>
+                        Zoox internal simulator
+                        <br>
+                        <br>
+                    </div>
+
+                    <div style="clear: both;"></div>
+
+                    <p>
+                        You may be wondering why we created our own sim in Unreal with all of these others out there.
+                        While we actually were not aware of Carla when we started or that AirSim was doing
+                        more than drones,
+                        we found the following out after trying these ourselves:
+
+                        <ol style="text-align: left; font-size: 17px;">
+                            <li >Our frame rates are higher (link to FAQ) while capturing several cameras, due to use of shared memory rather than sockets and asynchronous transfer.
+                            <li>Our road surface is not flat, but hilly, curvy, and with different widths at different points
+                            <li>Our assets - the map, cars, lighting, etc… are free, come with the project, and modifiable in Unreal.
+                        </ol>
+                    </p>
+
+                    <p>
+                        However, I think it’s a great thing to have a variety of simulators available. A cross-simulator
+                        benchmark would certainly be intriguing - as domain shift is a major obstacle for
+                        simulation in general. If you’re interested in working on this,
+                        <a href="mailto:craig@deepdrive.io?Subject=simulation%20transfer" target="_top"
+                            >let me know</a>.
+                    </p>
+
+                    <div style="float: left;  margin-right: 40px;  margin-bottom: 30px">
+                        <video controls loop width="500">
+                            <source src="../assets/video/wheeled-vehicle-unreal.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <p style="margin-top: 200px">
+                        Here you see some of the settings available for changing the way our car moves,
+                        including torque and steering response, differential, transmission, and engine settings. Unreal comes with
+                        <a href="https://docs.unrealengine.com/en-US/Engine/Physics/Vehicles/VehicleUserGuide">great tools
+                            that help alot here</a>.
+                    </p>
+
+                    <div style="clear: both;"></div>
+
+
+                    <div style="float: right;">
+                        <video width="480px" controls loop autoplay>
+                            <source src="../assets/video/unreal-blueprint.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <br>
+                        Adding a keybind to one of Unreal's built-in AI functions in a Blueprint.
+                    </div>
+
+                    <p>
+                        Prototyping in Unreal is extremely fast thanks to Blueprints, it's node-based visual scripting
+                        environment. Blueprints are 10x slower than C++, but it's easy to detect hotspots using Unreal's
+                        fantastic GPU and CPU profilers.
+                    </p>
+
+                    <div style="float: left; margin-bottom: 60px">
+                        <a href="../assets/img/cpu-profiler.jpg"><img src="../assets/img/cpu-profiler.jpg" width="200"/></a>
+                        <a href="../assets/img/gpu-profiler.jpg"><img src="../assets/img/gpu-profiler.jpg" width="200" height="139"/></a>
+                        <br>
+                        Unreal CPU profiler (left) and GPU profiler (right)
+                    </div>
+
+                    <div style="clear:both"></div>
+
+                    <div style="float: right; margin-left: 30px; ">
+                        <iframe src="https://giphy.com/embed/RJy4kBjPzZjm2Y23t1" width="480" height="270" frameBorder="0"
+                                class="giphy-embed" allowFullScreen></iframe>
+                        <div style="margin-bottom: 30px;">
+                            Press <kbd>``</kbd> to open the Unreal Console and one of the dev commands.
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 40px; ">
+                        We ship the Deepdrive sim as an Unreal development build, meaning you can call
+                        any of built-in Unreal dev commands or call your own C++ from the Unreal console
+                        within the game without
+                        needing to use the Unreal Editor.
+                    </p>
+
+
+                    <div style="clear:both"></div>
+
+                    <div style="float: left; margin-right: 30px; margin-bottom: 50px;">
+                        <a href="https://www.allegorithmic.com/"><img width="600" src="../assets/img/Substance_designer_spring_2018_SL_Header_PC_2000x850_0.jpg"/></a>
+                    </div>
+
+
+                    <p style="margin-top: 60px; ">
+                        We also use <a href="https://www.allegorithmic.com/">Substance</a>
+                        and its Unreal integration for <a
+                                href="https://github.com/deepdrive/deepdrive-sim/tree/master/Content/TuningCars/Materials/Hangar/material/Substance"
+                        >many of our materials,</a> a key tool for easily creating extremely realistic surfaces.
+                    </p>
+
+                    <div style="clear: both"></div>
+
+
+
+                    <div style="float: right; margin-left: 40px; margin-bottom: 50px;">
+                        <a href="../assets/img/debugging.jpg"><img width="400" src="../assets/img/debugging.jpg"/></a>
+                        <br>
+                        Visual Studio debugging. CLion on Linux <a href="https://blog.jetbrains.com/clion/2016/10/clion-and-ue4/">is also supported</a>.
+                    </div>
+
+
+                    <p style="margin-top: 65px;">
+                        Unreal's debugging workflow allows you to easily break anywhere into
+                        engine code and hot-reload C++ in your project.
+                    </p>
+
+                    <div style="clear: both"></div>
+
+
+                    <!--<img width="400" src="../assets/img/cube-map.jpg"/>-->
+
+                    <p>
+                        Overall, we've been very happy with Unreal Engine, a AAA game development platform
+                        with accessible and modifiable source, a promising long-term financial outlook due
+                        to its immensely popular games, being free for non-commercial use,
+                        and a solid start at becoming the engine of choice for self-driving simulation.
+                        We look forward to contributing to the project and openly testing all self-driving AI
+                        with it.
+                    </p>
+
+
+                    <h2>A final note</h2>
+                   <p>
+                       Creating fully autonomous cars will mean developing AI that has a
+                       grounded understanding of physics, our 3D world, and how to interact, predict, and cooperate with
+                       humans in a robust way. This makes it critically important that we develop self-driving
+                       in a way that is sensitive to AI in general and the sweeping effects it will have, where
+                       safety is of top importance. Deepdrive and our simulation platform are therefore
+                       about more than testing self-driving cars. It's about openly developing artificial
+                       intelligence optimized for safety before AI gets to a point where the time for setting
+                       a precedant and building responsible practices, community, and infrastructure has passed.
+                   </p>
+            </div>
+    </div>
+</div>
+<div class="container bs-docs-container blurred-body">
+
+    <!-- Begin MailChimp Signup Form -->
+    <div id="mc_embed_signup">
+        <form
+                action="//aiworld.us8.list-manage.com/subscribe/post?u=f9bbf4b0e7bc5e55647b6fb3c&amp;id=6c2b1fdb01"
+                method="post" id="mc-embedded-subscribe-form"
+                name="mc-embedded-subscribe-form" class="validate" target="_blank"
+                novalidate>
+            <div id="mc_embed_signup_scroll">
+                <h2 class="subscribe">Subscribe to our mailing list</h2>
+                <div class="mc-field-group">
+                    <input placeholder="Email Address" type="email" value="" name="EMAIL"
+                           class="required email" id="mce-EMAIL">
+                </div>
+                <div class="response" id="mce-responses" class="clear">
+                    <div class="response" id="mce-error-response"
+                         style="display:none"></div>
+                    <div class="response" id="mce-success-response"
+                         style="display:none"></div>
+                </div>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div class="marvin" style="position: absolute; left: -5000px;"
+                     aria-hidden="true"><input type="text"
+                                               name="b_f9bbf4b0e7bc5e55647b6fb3c_6c2b1fdb01"
+                                               tabindex="-1" value=""></div>
+
+                <div class="submit"><input type="submit" value="Subscribe"
+                                           name="subscribe"
+                                           id="mc-embedded-subscribe"
+                                           class="button"></div>
+            </div>
+        </form>
+    </div>
+
+    <!--End mc_embed_signup-->
+    Made with <span class="heart">♡</span> on <a class="aiworld" href="https://www.youtube.com/watch?v=wupToqz1e2g">our pale blue dot</a>
+</div>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../vendor/js/bootstrap.min.js"></script>
+<script src="../vendor/js/docs.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../vendor/js/ie10-viewport-bug-workaround.js"></script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-3213633-19', 'auto');
+    ga('send', 'pageview');
+
+</script>
+</body>
+</html>
