@@ -356,14 +356,14 @@ pre {
 
 .engine-compare {
     width: 100%;
-    font-size: 13px;
+    font-size: 16px;
     margin-bottom: 0px;
 }
 
 .engine-compare td {
     border: solid 1px black;
     text-align: left;
-    padding: 15px;
+    padding: 16px;
 }
 
 .engine-best {
@@ -395,7 +395,7 @@ pre {
 }
 
 .engine-name {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: normal;
     background-color: #efefef;
     color: #000;
