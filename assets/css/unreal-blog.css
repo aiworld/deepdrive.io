@@ -1,0 +1,293 @@
+
+.blog-section {
+    background: #fff;
+    padding: 10px;
+    margin: 0;
+    color: #000;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.levine-trajectory {
+    float: left;
+    margin-bottom: 50px;
+    margin-top: 80px;
+    text-align: left;
+}
+
+.levine-trajectory img {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.nvidia-dave {
+    float: left;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.nvidia-dave img {
+    width: 100%;
+}
+
+.kibosh img {
+    width: 75%;
+    text-wrap: normal;
+}
+
+.swerve-vid video {
+    width: 100%;
+
+}
+
+.pretrain-pose {
+    float: left;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.pretrain-pose img {
+    width: 100%;
+}
+
+.pretrain-prose {
+    margin-top: 50px;
+}
+
+.sim-col-1 {
+    width: 100%;
+}
+
+.sim-col-2 {
+    width: 100%;
+}
+
+.airsim, .carla, .autosim, .zoox, .wheeled-vehicle video, .blueprint-vid video, .profiler img, .unreal-console iframe, .substance img {
+    width: 100%;
+}
+
+
+@media screen and (min-width: 950px) {
+    .blog-section {
+        padding: 55px;
+        margin: 55px;
+        border-radius: 10px;
+    }
+
+    .levine-trajectory img {
+        width: 500px;
+        margin: 10px;
+    }
+
+    .nvidia-dave img {
+        width: 400px;
+        float: left;
+        margin: 10px;
+    }
+
+    .kibosh {
+        float: right;
+        width: 325px;
+        margin: 10px;
+    }
+
+    .swerve-vid {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .swerve-vid video, .swerve-vid {
+        width: 600px;
+        text-align: center;
+        margin: auto;
+    }
+
+    .pretrain-pose {
+        float: right;
+        margin-left: 30px;
+        width: 350px;
+        margin-top: 40px;
+    }
+
+    .pretrain-pose img {
+        margin: 10px;
+        width: 350px;
+    }
+
+    .pretrain-prose {
+        margin-top: 250px;
+        float: left;
+        width: 550px;
+    }
+
+    .sim-col-1 {
+        float: left;
+    }
+
+    .sim-col-2 {
+        float: left; margin-left: 40px;
+    }
+
+    .airsim {
+        height: 257px;
+    }
+
+    .carla {
+        height: 235px;
+    }
+
+    .autosim, .zoox, .airsim, .carla, .sim-col-1, .sim-col-2 {
+        width: 450px;
+    }
+
+    .wheeled-vehicle {
+        float: left;
+        margin-right: 40px;
+        margin-bottom: 30px;
+    }
+
+    .wheeled-vehicle video {
+        width: 500px;
+    }
+
+    .wheeled-vehicle prose {
+        margin-top: 200px;
+    }
+
+    .blueprint-vid {
+        float: right;
+    }
+
+    .blueprint-vid video {
+        width: 480px;
+    }
+
+    .profiler {
+        float: left;
+        margin-bottom: 60px;
+    }
+
+    .profiler img {
+        width: 225px;
+        height: 139px;
+    }
+
+    .unreal-console {
+        float: right;
+        margin-left: 30px;
+    }
+
+    .unreal-console iframe {
+        width: 480px;
+        height: 270px;
+    }
+
+    .substance {
+        float: left; margin-right: 30px; margin-bottom: 50px;
+    }
+
+    .substance img {
+        width: 600px;
+    }
+}
+
+.blog-section a {
+    color: #00f;
+}
+
+.blog-section h2 {
+    text-align: left;
+    font-size: 25px;
+    font-weight: bold;
+
+}
+
+.blog-section h3 {
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.blog-title {
+    text-align: center;
+    font-size: 2.3em;
+}
+
+.blog-time {
+    margin-bottom: 20px;
+}
+
+.blog-body p {
+    text-align: left;
+    padding-bottom: 15px;
+    font-weight: normal;
+}
+
+
+
+.blog-section a:hover {
+    color: #00f;
+}
+
+.skip-link {
+    font-size: 18px;
+}
+
+.blog-section .skip-anchor a {
+    color: black;
+    text-underline: none !important;
+}
+
+.engine-compare {
+    width: 100%;
+    font-size: 16px;
+    margin-bottom: 0px;
+}
+
+.engine-compare td {
+    border: solid 1px black;
+    text-align: left;
+    padding: 16px;
+}
+
+.engine-best {
+    background-color: #00CC00;
+}
+
+.engine-better {
+    background-color: #bbCC00;
+}
+
+.engine-okay {
+    background-color: #ffff00;
+}
+
+.engine-worse {
+    background-color: #ff8800;
+}
+
+.engine-worst {
+    background-color: #ff0000;
+    color: white;
+}
+
+.engine-margin {
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #66f;
+    color: white;
+}
+
+.engine-name {
+    font-size: 16px;
+    font-weight: normal;
+    background-color: #efefef;
+    color: #000;
+}
+
+.engine-compare-caption {
+    margin-bottom: 10px;
+}
