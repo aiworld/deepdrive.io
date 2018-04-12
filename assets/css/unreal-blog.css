@@ -131,11 +131,11 @@
     }
 
     .airsim {
-        height: 257px;
+        height: 275px;
     }
 
     .carla {
-        height: 235px;
+        height: 250px;
     }
 
     .autosim, .zoox, .airsim, .carla, .sim-col-1, .sim-col-2 {
