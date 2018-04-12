@@ -36,7 +36,7 @@
     text-wrap: normal;
 }
 
-.swerve-vid video {
+.swerve-vid iframe {
     width: 100%;
 
 }
@@ -68,6 +68,9 @@
     width: 100%;
 }
 
+.blueprint-vid iframe {
+    height: 315px;
+}
 
 @media screen and (min-width: 950px) {
     .blog-section {
@@ -98,7 +101,7 @@
         margin-bottom: 50px;
     }
 
-    .swerve-vid video, .swerve-vid {
+    .swerve-vid iframe, .swerve-vid {
         width: 600px;
         text-align: center;
         margin: auto;
@@ -160,7 +163,7 @@
         float: right;
     }
 
-    .blueprint-vid video {
+    .blueprint-vid iframe {
         width: 480px;
     }
 
