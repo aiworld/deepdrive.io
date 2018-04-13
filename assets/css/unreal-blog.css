@@ -38,7 +38,6 @@
 
 .swerve-vid iframe {
     width: 100%;
-
 }
 
 .pretrain-pose {
@@ -54,6 +53,18 @@
 
 .pretrain-prose {
     margin-top: 50px;
+}
+
+.pretrain {
+    /*background: #aaa;*/
+    float: left;
+    /*padding: 20px;*/
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.gen {
+    width: 100%;
 }
 
 .sim-col-1 {
@@ -125,7 +136,7 @@
     }
 
     .pretrain-prose {
-        margin-top: 250px;
+        margin-top: 150px;
         float: left;
         width: 550px;
     }
@@ -166,9 +177,9 @@
         width: 500px;
     }
 
-    .wheeled-vehicle prose {
-        margin-top: 200px;
-    }
+    /*.wheeled-vehicle prose {*/
+        /*margin-top: 200px;*/
+    /*}*/
 
     .blueprint-vid {
         float: right;

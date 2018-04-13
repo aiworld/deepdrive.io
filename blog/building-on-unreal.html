@@ -44,7 +44,7 @@
                     <a href="https://deepdrive.io">Check it out!</a>
                 </p>
                 <h2>Background - <a class="skip-link" href="#unreal">or skip to Unreal stuff</a></h2>
-                <p>A little over a year ago, I worked with OpenAI to release an integration for GTAV into
+                <p>In early 2017, I worked with OpenAI to release an integration for GTAV into
                     the Universe platform. The goal was to make one of the most complex video games available to
                     researchers to experiment with methods like
                     <a href="http://rll.berkeley.edu/deeprlcourse/">deep reinforcement learning</a>
@@ -52,10 +52,10 @@
                 </p>
 
                 <p>
-                    However, it turned out that TakeTwo was not
+                    Unfortunately, we had to shut the project down since, TakeTwo was not
                     <a href="https://www.forbes.com/sites/aarontilley/2017/10/04/grand-theft-auto-v-the-rise-and-fall-of-the-diy-self-driving-car-lab/"
-                    >as receptive</a>
-                    to people using GTAV for this purpose as I had hoped.
+                    >receptive</a>
+                    to people using GTAV for this purpose.
                 </p>
 
                 <div class="kibosh">
@@ -70,10 +70,11 @@
                     I hope that rebuilding the project on Unreal will be able to restore what you
                     found valuable in the GTA version, and eventually do much more.
                 </p>
-                <p>Before the Universe integration had launched, I started work at Uber's Advanced Technologies Group
-                    on their perception team. Deepdrive caught their eye as relevant experience applying
-                    deep learning to self-driving. It was also an opportunity to incorporate real world concerns
-                    back into Deepdrive, something I was grateful that Uber was supportive of.
+                <p>Before the Universe integration had launched, I started work with the perception team at Uber's
+                    Advanced Technologies Group.
+                    Deepdrive caught their eye as relevant experience applying deep learning to self-driving. It was
+                    also an opportunity to incorporate real world concerns back into Deepdrive, something I was grateful
+                    to Uber for supporting.
                 </p>
                 <div class="levine-trajectory">
                     <a href="../assets/img/levine-trajectory-iid.jpg">
@@ -85,8 +86,9 @@
                 </div>
                 <div style="clear: right;"></div>
                 <p style="margin-top: 100px;">
-                    One thing I noticed early on there was that I had solved some of the same problems in simulation
-                    as had been solved for real-world cars, but in a much different way. For example,
+                    I noticed early on that you could solve similar problems in simulation that you can for real-world
+                    cars but with very different approaches.
+                    For example,
                     in imitation learning, you often need to
                     reduce sampling error when training and test data
                     <a href="https://youtu.be/C_LGsoe36I8?t=14m31s">are not independently and identically distributed.</a>
@@ -125,43 +127,69 @@
 
                 </div>
 
-                <div style="clear: both;"></div>
 
-                <p class="pretrain-prose">
+                <div style="clear: both;"></div>
+                <p>
                     So it’d be great to use simulated training in order to improve real-world performance as
-                    we can get much more accurate corrective actions. More broadly, we can just try a lot more
-                    and do so more safely.
-                    One of the amazing potential opportunities in simulation is to
-                    <a href="https://arxiv.org/abs/1504.00702">learn</a> a 3D model from 2D images,
-                    then use
-                    <a href="https://arxiv.org/abs/1711.03213">GANs</a> to adapt
-                    that mapping to the real-world.
+                    we can get much more accurate corrective actions.
+                    Excitingly, when we worked on verifying this idea at Uber - that agents can transfer between real and
+                    virtual environments, I found that a network which has only seen real-world data could
+                    drive in a simulated environment surprisingly well, i.e. stay in it's lane.
+                    So going the other direction
+                    is promising (virtual🡪real), although not something we had time to try.
                 </p>
 
-                <div class="pretrain-pose">
-                    <a href="../assets/img/input-remapping-trick.jpg">
-                        <img src="../assets/img/input-remapping-trick.jpg" align="left"/></a>
+                <div class="pretrain">
+                    <p class="pretrain-prose">
+                        I want to provide a brief side note to how this would be possible as I think it's an
+                        important point.
+                        <a href="https://arxiv.org/abs/1504.00702">Finn, Levine et al.</a>,
+                        demonstrates how to train a neural network with ideal sensors, in their case
+                        motion capture sensors, then swap out those sensors with a network which has learned
+                        to mimic them.
 
-                    <div>
-                    Using motion capture sensors for training a robot to act using just a camera.
-                        <a href="https://arxiv.org/abs/1504.00702">Levine, Finn, et al. 16</a></div>
+                        Applying this idea to self-driving, we can train an agent with any
+                        state information (including 3D, and even planning state) available in the game,
+                        providing we can also learn to generate that information from sensors we'll have in the
+                        real-world, i.e. cameras.
+
+                    </p>
+                    <div class="pretrain-pose">
+                        <a href="../assets/img/input-remapping-trick.jpg">
+                            <img src="../assets/img/input-remapping-trick.jpg" align="left"/></a>
+                        <div>
+                            Using motion capture sensors for training a robot to act using just a camera.
+                            <a href="https://arxiv.org/abs/1504.00702">Levine, Finn, et al. 16</a></div>
+                    </div>
+                    <div style="clear: both;"></div>
+
+                    <p>
+                        The trick then becomes making the game realistic enough, for that training
+                        to transfer over to the real-world. This is where GANs and style transfer methods
+                        come into play for generating contextually realistic data. Below are some visual examples of
+                        this.
+
+                    </p>
+
+                    <a href="https://junyanz.github.io/CycleGAN/"><img class="gen" src="../assets/img/cycle-gan.jpg" align="left"/></a>
+                    <div><a href="https://junyanz.github.io/CycleGAN/">Cycle GAN</a> learns a bi-directional transformation between image classes</div>
+                    <a href="https://github.com/luanfujun/deep-photo-styletransfer"><img class="gen" src="../assets/img/deep-photo-styletransfer.jpg" align="left"/></a>
+                    <div style="margin-bottom: 10px;"><a href="https://junyanz.github.io/CycleGAN/">Deep photo style transfer</a> learns to mix shape and style</div>
+
+                    <p>
+                        Okay, so this has become more than a brief side note, but the point is that
+                        we can essentially cheat within simulation and get away with by using
+                        neural networks which map the virtual world to the real world and vice versa.
+                        Cool right?
+                    </p>
                 </div>
 
 
-                <div style="clear: both;"></div>
+
+                <div style="clear: both; border-top: solid 1px #aaa; margin-bottom: 10px;"></div>
                 <p>
-                    Excitingly, when we worked on verifying this idea at Uber - that agents can transfer between real and
-                    virtual environments, we found that neural networks trained on real-world
-                    driving were able to drive in simulated environments surprisingly well. e.g.
-                    The car would steer in the correct direction and stay in the lane, although it would
-                    swerve more than it did on a real road as we hadn't fine tuned the network to adapt it to simulated
-                    images.
-                    This meant going the other direction
-                    was promising (virtual->real), and something I am still very bullish about.
-                </p>
-                <p>
-                    Over the course of a year at Uber,
-                    I became familiarized with the problems of real autonomous vehicles -
+                    Through these experiences at Uber,
+                    I became familiar with the problems of real autonomous vehicles -
                     digging into the fundamental reasons for our disengagements and riding along in test cars.
                     This gave me a deep appreciation for the difficultly of the problem
                     and I got increasingly excited about what an open self-driving simulator could to
@@ -173,7 +201,7 @@
                     <!--money, and risk required to do so on the road.-->
                     <!--</ol>-->
                 <p>
-                    So in November, I left to do just that and began work on Deepdrive 2.0.
+                    In November, I left to do just that and began work on Deepdrive 2.0.
                 </p>
                 <a class="skip-anchor" name="unreal"></a>
                 <h2>The move to Unreal</h2>
@@ -353,13 +381,11 @@
                 </p>
 
                 <p>
-                    I think it’s great to have a variety of simulators available. A cross-simulator
+                    I think it’s great to have a variety of simulators available though. A cross-simulator
                     benchmark would be extremely helpful for helping test agents ability to transfer
                     between environments.
                     This will be critical as agents will need to transfer to the real world to be useful.
-                    If you’re interested in working on this idea, check out
-                    <a href="https://blog.openai.com/retro-contest/">OpenAI's retro contest</a>
-                    or
+                    If you’re interested in working on this idea
                     <a href="mailto:craig@deepdrive.io?Subject=simulation%20transfer" target="_top"
                     >drop me a line</a>.
                 </p>
@@ -371,7 +397,7 @@
                 </p>
                 <h3>Built-in vehicle support</h3>
                 <div class="wheeled-vehicle">
-                    <video controls loop>
+                    <video controls loop poster="../assets/img/wheeled-vehicle.jpg">
                         <source src="../assets/video/wheeled-vehicle-unreal.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -379,9 +405,9 @@
 
 
                 <p class="wheeled-vehicle-prose">
-                    These are some of the tuning options available for the built-in
+                    For example, there are a plethora of options available in Unreal for changing the way the
                     <a href="https://docs.unrealengine.com/en-US/Engine/Physics/Vehicles/VehicleUserGuide"
-                    >wheeled vehicle</a> in Unreal, including torque and steering response, differential, transmission,
+                    >vehicle</a> moves, including torque and steering response, differential, transmission,
                     and engine settings.
                 </p>
 
@@ -398,7 +424,7 @@
                 </div>
 
                 <p>
-                    Prototyping in Unreal is extremely fast thanks to Blueprints, it's node-based scripting
+                    You can also prototype ideas in Unreal very quickly thanks to blueprints, it's node-based scripting
                     environment. Blueprints are 10x slower at runtime than C++, but it's easy to detect hotspots with Unreal's
                     GPU and CPU profilers and reimplement slow Blueprint code in C++.
                 </p>
@@ -417,13 +443,13 @@
                     <iframe src="https://giphy.com/embed/RJy4kBjPzZjm2Y23t1" frameBorder="0"
                             class="giphy-embed" allowFullScreen></iframe>
                     <div style="margin-bottom: 30px;">
-                        Press <kbd>``</kbd> in Deepdrive to open the Unreal Console and one of the dev commands.
+                        Press <kbd>``</kbd> in Deepdrive to open the Unreal Console and call into C++.
                     </div>
                 </div>
 
                 <p style="margin-top: 40px; ">
                     We ship our sim with the Unreal Console enabled, meaning you can call
-                    any of built-in Unreal dev commands straight from the game. You can also call your
+                    any of built-in Unreal commands straight from the game. You can also call your
                     own C++ the same way with custom commands.
                 </p>
 
@@ -442,7 +468,8 @@
                     and its Unreal integration for <a
                         href="https://github.com/deepdrive/deepdrive-sim/tree/master/Content/TuningCars/Materials/Hangar/material/Substance"
                 >many of our materials,</a> which we have found to be the source of several incredibly realistic
-                    surfaces in Unreal games.
+                    surfaces in Unreal games. Substance makes it easy to also procedurally generate your own realistic materials
+                    and textures.
                 </p>
 
                 <div style="clear: both"></div>
@@ -471,7 +498,7 @@
                     Overall, we've been very happy with Unreal Engine, a AAA game development platform
                     with accessible and modifiable source,
                     and a solid start at becoming the engine of choice for self-driving simulation.
-                    We look forward to allowing many more people to use it for improving the state of the art
+                    We look forward to using it to improve the state of the art
                     in self-driving.
                 </p>
 
@@ -486,11 +513,9 @@
                     An important distinction of self-driving is that privacy and secrecy concerns are
                     minimal
                     compared to other large AI applications (i.e. search and social),
-                    and that involving more people works towards democratization and makes AI safer in the short-term.
-                    Deepdrive is
-                    about more than just testing self-driving cars. It's about openly developing safe AI
-                    before the time for setting
-                    a precedent and building responsible practices, community, and infrastructure is behind us.
+                    and that involving more people is good for both the short and long-term safety of AI.
+                    So while Deepdrive is a self-driving car simulation, its goals extend beyond that to creating
+                    precedent for the safe development of AI which is much more capable.
 
                 </p>
             </div>
