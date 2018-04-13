@@ -72,6 +72,11 @@
     height: 315px;
 }
 
+.unreal-games {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
 @media screen and (min-width: 950px) {
     .blog-section {
         padding: 55px;
@@ -137,11 +142,17 @@
         height: 275px;
     }
 
-    .carla {
+    .carla , .zoox {
         height: 250px;
+
+    }
+    .autosim {
+        width: 450px;
+        height: 275px;
+
     }
 
-    .autosim, .zoox, .airsim, .carla, .sim-col-1, .sim-col-2 {
+    .zoox, .airsim, .carla, .sim-col-1, .sim-col-2 {
         width: 450px;
     }
 
@@ -194,6 +205,12 @@
     .substance img {
         width: 600px;
     }
+
+    .unreal-games img {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
 }
 
 .blog-section a {
