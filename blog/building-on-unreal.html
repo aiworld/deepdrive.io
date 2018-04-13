@@ -88,8 +88,8 @@
                     One thing I noticed early on there was that I had solved some of the same problems in simulation
                     as had been solved for real-world cars, but in a much different way. For example,
                     in imitation learning, you often need to
-                    reduce sampling error when the training and test distributions
-                    <a href="https://youtu.be/C_LGsoe36I8?t=14m31s">are not IID.</a>
+                    reduce sampling error when training and test data
+                    <a href="https://youtu.be/C_LGsoe36I8?t=14m31s">are not independently and identically distributed.</a>
                 </p>
                 <div style="clear: left;"></div>
                 <div class="nvidia-dave">
@@ -111,7 +111,7 @@
                 </p>
                 <div style="clear: left;"></div>
                 <p>
-                    In simulation, we can (safely!) vary the trajectory of the car and see what an oracle
+                    In simulation, we can safely vary the trajectory of the car and see what an oracle
                     path-following AI does to correct its trajectory.
                 </p>
                 <div class="swerve-vid">
@@ -128,11 +128,11 @@
                 <div style="clear: both;"></div>
 
                 <p class="pretrain-prose">
-                    So it’d be great to use simulated training to improve real-world performance as
+                    So it’d be great to use simulated training in order to improve real-world performance as
                     we can get much more accurate corrective actions. More broadly, we can just try a lot more
-                    and do so much more safely.
+                    and do so more safely.
                     One of the amazing potential opportunities in simulation is to
-                    <a href="https://arxiv.org/abs/1504.00702">learn</a> to create a 3D model from 2D images,
+                    <a href="https://arxiv.org/abs/1504.00702">learn</a> a 3D model from 2D images,
                     then use
                     <a href="https://arxiv.org/abs/1711.03213">GANs</a> to adapt
                     that mapping to the real-world.
@@ -154,16 +154,17 @@
                     virtual environments, we found that neural networks trained on real-world
                     driving were able to drive in simulated environments surprisingly well. e.g.
                     The car would steer in the correct direction and stay in the lane, although it would
-                    swerve more than it did on a real road.
+                    swerve more than it did on a real road as we hadn't fine tuned the network to adapt it to simulated
+                    images.
                     This meant going the other direction
-                    was promising (virtual->real), and something I am still very bullish about trying.
+                    was promising (virtual->real), and something I am still very bullish about.
                 </p>
                 <p>
                     Over the course of a year at Uber,
-                    I was able to familiarize myself more with the problems real autonomous vehicles by
+                    I became familiarized with the problems of real autonomous vehicles -
                     digging into the fundamental reasons for our disengagements and riding along in test cars.
-                    Doing so gave me a deep appreciation for the difficultly of the problem
-                    and caused me to become increasingly excited about what an open self-driving simulator could to
+                    This gave me a deep appreciation for the difficultly of the problem
+                    and I got increasingly excited about what an open self-driving simulator could to
                     help solve make self-driving happen.
                     <!--by-->
                     <!--<ol style="text-align: left; font-size: 17px;">-->
@@ -201,7 +202,7 @@
                     Of the many we evaluated, Unreal not only checked the boxes, but <i>felt</i> best to us.
                     From a feature perspective Unreal is the only free, shared source, AAA engine available.
                     Having the source is critical as we're going to need to optimize 8+
-                    camera rendering, possibly swap out the physics engine, and run faster than real-time.
+                    camera rendering, run faster than real-time, and possibly swap out the physics engine.
                 </p>
 
                 <table class="engine-compare">
@@ -338,9 +339,9 @@
 
                 <p>
                     You may be wondering why we created our own open source sim in Unreal with the other options available.
-                    While we actually were not aware of Carla, or that AirSim was doing
+                    While we actually were not aware initially of Carla, or that AirSim was doing
                     more than drones,
-                    we found the following out after the fact:
+                    we found the following later on:
 
                     <ol style="text-align: left; font-size: 17.68px;">
                         <li>Our frame rates are higher while capturing several cameras, due to use of shared memory rather
@@ -352,18 +353,21 @@
                 </p>
 
                 <p>
-                    I think it’s great, however, to have a variety of simulators available. A cross-simulator
+                    I think it’s great to have a variety of simulators available. A cross-simulator
                     benchmark would be extremely helpful for helping test agents ability to transfer
-                    between environments before transferring into the real-world. If you’re interested in working on this,
+                    between environments.
+                    This will be critical as agents will need to transfer to the real world to be useful.
+                    If you’re interested in working on this idea, check out
+                    <a href="https://blog.openai.com/retro-contest/">OpenAI's retro contest</a>
+                    or
                     <a href="mailto:craig@deepdrive.io?Subject=simulation%20transfer" target="_top"
-                    >let me know</a>.
+                    >drop me a line</a>.
                 </p>
                 <div style="clear: both"></div>
                 <h2>Developing in Unreal</h2>
                 <p>
                     You don't need to develop in Unreal to use Deepdrive. You just need to write Python.
-                    However, I think it's interesting
-                    and sometimes very helpful to be able to modify the environment for your experiments.
+                    However, it's sometimes very helpful to be able to modify the environment for your experiments.
                 </p>
                 <h3>Built-in vehicle support</h3>
                 <div class="wheeled-vehicle">
@@ -375,7 +379,7 @@
 
 
                 <p class="wheeled-vehicle-prose">
-                    Here are some of the tuning options available for the built-in
+                    These are some of the tuning options available for the built-in
                     <a href="https://docs.unrealengine.com/en-US/Engine/Physics/Vehicles/VehicleUserGuide"
                     >wheeled vehicle</a> in Unreal, including torque and steering response, differential, transmission,
                     and engine settings.
@@ -383,7 +387,7 @@
 
                 <div style="clear: both;"></div>
 
-                <h2>Visual scripting</h2>
+                <h3>Visual scripting</h3>
 
                 <div class="blueprint-vid">
                     <iframe
@@ -408,7 +412,7 @@
 
                 <div style="clear:both"></div>
 
-                <h2>Unreal console</h2>
+                <h3>Unreal console</h3>
                 <div class="unreal-console">
                     <iframe src="https://giphy.com/embed/RJy4kBjPzZjm2Y23t1" frameBorder="0"
                             class="giphy-embed" allowFullScreen></iframe>
@@ -418,14 +422,14 @@
                 </div>
 
                 <p style="margin-top: 40px; ">
-                    We ship our sim as an Unreal development build, meaning you can call
+                    We ship our sim with the Unreal Console enabled, meaning you can call
                     any of built-in Unreal dev commands straight from the game. You can also call your
                     own C++ the same way with custom commands.
                 </p>
 
 
                 <div style="clear:both"></div>
-                <h2>Substance</h2>
+                <h3>Substance</h3>
 
                 <div class="substance">
                     <a href="../assets/img/Substance_designer_spring_2018_SL_Header_PC_2000x850_0.jpg"><img
@@ -437,12 +441,13 @@
                     We use <a href="https://www.allegorithmic.com/">Substance</a>
                     and its Unreal integration for <a
                         href="https://github.com/deepdrive/deepdrive-sim/tree/master/Content/TuningCars/Materials/Hangar/material/Substance"
-                >many of our materials,</a> a key tool for easily creating extremely realistic surfaces.
+                >many of our materials,</a> which we have found to be the source of several incredibly realistic
+                    surfaces in Unreal games.
                 </p>
 
                 <div style="clear: both"></div>
 
-                <h2>Debugging workflow</h2>
+                <h3>Debugging workflow</h3>
                 <div style="float: right; margin-left: 40px; margin-bottom: 50px;">
                     <a href="../assets/img/debugging.jpg"><img width="400" src="../assets/img/debugging-min.jpg"/></a>
                     <br>
@@ -461,6 +466,7 @@
 
                 <!--<img width="400" src="../assets/img/cube-map.jpg"/>-->
 
+                <h2>Conclusion</h2>
                 <p>
                     Overall, we've been very happy with Unreal Engine, a AAA game development platform
                     with accessible and modifiable source,
@@ -472,18 +478,20 @@
                 <h2>A final note</h2>
                 <p>
                     Creating fully autonomous cars will mean developing AI that has a
-                    grounded understanding of physics, our 3D world, and how to interact, predict, and cooperate with
-                    humans in a robust way. Simulation allows us to do this
+                    grounded understanding of physics, our 3D world, and how to interact, predict, and cooperate with us.
+                    Simulation allows us to do this
                     in a way that is sensitive sweeping effects AI will have, where
                     ensuring safety, transparency, and broad participation
-                    are of utmost importance. Deepdrive is
-                    about more than testing self-driving cars. It's about openly developing AI
-                    optimized for safety before AI gets to a point where the time for setting
-                    a precedent and building responsible practices, community, and infrastructure has passed.
-                    It's also important to realize how unique self-driving is in that privacy and secrecy concerns are
-                    far fewer than other large AI applications (i.e. search and social), and that involving more people
-                    is not only good for long-term safety democratization of AI, but is also extremely helpful
-                    in making the technology safer in the short-term.
+                    are of utmost importance.
+                    An important distinction of self-driving is that privacy and secrecy concerns are
+                    minimal
+                    compared to other large AI applications (i.e. search and social),
+                    and that involving more people works towards democratization and makes AI safer in the short-term.
+                    Deepdrive is
+                    about more than just testing self-driving cars. It's about openly developing safe AI
+                    before the time for setting
+                    a precedent and building responsible practices, community, and infrastructure is behind us.
+
                 </p>
             </div>
         </div>
