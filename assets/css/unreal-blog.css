@@ -88,6 +88,12 @@
     margin-top: 20px;
 }
 
+.swerve-vid {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
 @media screen and (min-width: 950px) {
     .blog-section {
         padding: 55px;
@@ -112,10 +118,6 @@
         margin: 10px;
     }
 
-    .swerve-vid {
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
 
     .swerve-vid iframe, .swerve-vid {
         width: 600px;
