@@ -115,7 +115,7 @@
                 <div style="clear: left;"></div>
                 <p>
                     In simulation, we can safely vary the trajectory of the car and see what an oracle
-                    path-following AI does to correct its trajectory.
+                    path-following agent does to correct its trajectory.
                 </p>
                 <div class="swerve-vid">
                     <iframe src="https://giphy.com/embed/2jMon1ulxOeNzZWk8H" width="480" height="270"
@@ -137,25 +137,25 @@
                     virtual environments at Uber, I found that a network which has only seen real-world data could
                     drive in a simulated environment surprisingly well, i.e. stay in it's lane.
                     So going the other direction
-                    is promising (virtual→real), although not something we had time to try.
+                    is promising (virtual→real), although not something we were able to try.
                 </p>
 
                 <div class="pretrain">
                     <p class="pretrain-prose">
-                        I want to provide a brief side note to how this is possible as I think it's extremely promising.
+                        I want to provide a brief side note to how this is possible as it's quite promising.
                         Work from <a href="https://arxiv.org/abs/1504.00702">Finn, Levine et al.</a>,
                         demonstrates how you can train a neural network with ideal sensors, in their case
-                        motion capture sensors, then swap out the motion capture sensors with a
+                        motion capture sensors, then swap out those sensors with a
                         network which has learned
-                        to mimic them - using only the camera as input.
+                        to mimic them, allowing them to use solely the camera for input.
 
-                        Applying this idea to self-driving, we can train an agent with any
-                        state information (including 3D, and even planning state) available in the game,
+                        Applying this idea to self-driving, we could train an agent with any
+                        state information available in the game (i.e. 3D or planning trajectories),
                         providing we can also learn to generate that information from sensors we'll have in the
                         real-world, i.e. cameras.
 
-                        This allows us to use much more information during training, drawing from what is
-                        essentially the god-like knowledge of the world we have in simulation.
+                        This allows us to use much more information during training, drawing from
+                        essentially god-like sensors available in simulation.
 
                     </p>
                     <div class="pretrain-pose">
@@ -170,7 +170,7 @@
                     <p>
                         The trick then becomes making the simulation realistic enough for that training
                         to transfer to the real-world. This is where GANs and style transfer methods
-                        come into play for generating contextually realistic data. Below are some visual examples.
+                        could help generate contextually realistic data. Below are some visual examples.
 
                     </p>
 
@@ -181,7 +181,7 @@
 
                     <p>
                         Okay, so this has become more than a brief side note, but the point is that
-                        we can essentially cheat within simulation, and get away with it, by using
+                        we can essentially cheat within simulation, and get away with it by using
                         neural networks which map the virtual world to the real world and vice versa.
                     </p>
                 </div>
@@ -194,8 +194,8 @@
                     I became familiar with the problems of real autonomous vehicles -
                     digging into the fundamental reasons for our disengagements and riding along in test cars.
                     This gave me a deep appreciation for the difficultly of the problem
-                    and caused me to become increasingly excited about what an open self-driving simulator could to
-                    help solve make self-driving happen.
+                    and made me increasingly excited about what an open self-driving simulator could to
+                    help make self-driving happen.
                     <!--by-->
                     <!--<ol style="text-align: left; font-size: 17px;">-->
                     <!--<li >Letting more people work on the problem, and-->
@@ -386,7 +386,7 @@
                     I think it’s great to have a variety of simulators available though. A cross-simulator
                     benchmark would be extremely helpful for helping test agents ability to transfer
                     between environments, including to the real world.
-                    If you’re interested in working on this idea feel free
+                    If you’re interested in working on this idea
                     <a href="mailto:craig@deepdrive.io?Subject=simulation%20transfer" target="_top"
                     >drop me a line</a>.
                 </p>
@@ -395,7 +395,7 @@
                 <p>
                     You don't need to develop in Unreal to use Deepdrive; you just need to write Python.
                     However, for many projects, it will be important to be able to modify the simulation,
-                    or at least see how it works at the lowest levels.
+                    or at least see how it works at its lowest levels.
 
                 </p>
                 <h3>Built-in vehicle support</h3>
@@ -513,15 +513,15 @@
                     in a way that is sensitive sweeping effects AI will have, where
                     ensuring safety, transparency, and broad participation
                     are of utmost importance.
-                    An important distinction of self-driving is that privacy and secrecy concerns are
+                    A distinction of self-driving is that privacy and secrecy concerns are
                     minimal
                     compared to other large AI applications (i.e. search and social),
                     and that involving more people is good for both short-term safety, providing transparency and increased resources
                     for development and testing, and long-term safety, ensuring AI is not controlled by relatively
                     small numbers of people.
                     So while Deepdrive is a self-driving car simulation, its goals extend beyond that, to creating
-                    a precedent for the safe development of AI which is much more capable than self-driving cars.
-                    A type of AI which we can all be proud to say was - created by us.
+                    a precedent for the safe development of future AI.
+                    The type of AI which we can all be proud to say was - created by us.
 
                 </p>
             </div>
