@@ -140,6 +140,9 @@
                     is promising (virtual→real), although not something we were able to try.
                 </p>
 
+                <div style="clear: both; border-top: solid 1px #aaa; margin-bottom: 10px;"></div>
+
+
                 <div class="pretrain">
                     <p class="pretrain-prose">
                         I want to provide a brief side note to how this is possible as it's quite promising.
@@ -229,7 +232,8 @@
 
                 <p>
                     The first step in developing Deepdrive 2.0 was choosing an engine.
-                    Of the many we evaluated, Unreal not only checked the boxes, but <i>felt</i> best to us.
+                    Of the many we evaluated, Unreal not only checked the boxes, but "felt" best to us while using it,
+                    especially in Linux.
                     From a feature perspective Unreal is the only free, shared source, AAA engine available.
                     Having the source is critical as we're going to need to optimize 8+
                     camera rendering, run faster than real-time, and possibly swap out the physics engine.
@@ -368,10 +372,7 @@
 
 
                 <p>
-                    You may be wondering why we created our own open source sim in Unreal with the other options available.
-                    While we actually were not aware initially of Carla, or that AirSim was doing
-                    more than drones,
-                    we found the following later on:
+                    Some of the unique things about Deepdrive that sets us apart from these other projects are
 
                     <ol style="text-align: left; font-size: 17.68px;">
                         <li>Our frame rates are higher while capturing several cameras, due to use of shared memory rather
@@ -383,7 +384,8 @@
                 </p>
 
                 <p>
-                    I think it’s great to have a variety of simulators available though. A cross-simulator
+                    Regardless, I think it’s a benefit to everyone to have a variety of simulators available.
+                    A cross-simulator
                     benchmark would be extremely helpful for helping test agents ability to transfer
                     between environments, including to the real world.
                     If you’re interested in working on this idea
@@ -498,7 +500,7 @@
 
                 <h2>Conclusion</h2>
                 <p>
-                    Overall, we've been very happy with Unreal Engine, a AAA game development platform
+                    So far, we've been very happy with Unreal Engine, a AAA game development platform
                     with accessible and modifiable source,
                     and a solid start at becoming the engine of choice for self-driving simulation.
                     We look forward to using it to make self-driving accessible to everybody.
