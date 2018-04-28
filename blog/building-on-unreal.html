@@ -151,10 +151,10 @@
                         I want to provide a brief side note to how this is possible as it will be very important
                         for simulation to be useful.
                         Work from <a href="https://arxiv.org/abs/1504.00702">Finn, Levine et al.</a>,
-                        demonstrates how you can train a neural network with ideal sensors, in their case
+                        demonstrates how to train a neural network with ideal sensors, in their case
                         motion capture sensors, then swap out those sensors with a
                         network which has learned
-                        to mimic them. This allows them to use solely the camera for input.
+                        to mimic them. This enables using just the camera as input at test time.
 
                         Applying this idea to self-driving, we could train an agent with any
                         state information available in the game (i.e. 3D or planning trajectories),
